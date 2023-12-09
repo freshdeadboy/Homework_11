@@ -48,9 +48,10 @@ class Birthday(Field):
         self._value = new_value       
 
 class Record:
-    def __init__(self, name):
+    def __init__(self, name, birthday=None):
         self.name = Name(name)
         self.phones = []
+        self.birthday = Birthday(birthday) if birthday else None
 
     def add_phone(self, phone):
         self.phones.append(Phone(phone))
@@ -79,7 +80,7 @@ class Record:
         return None
 
     def __str__(self):
-        return f"Contact name: {self.name.value}, phones: {'; '.join(str(p) for p in self.phones)}"
+        return f"Contact name: {self.name.value}, phones: {'; '.join(str(p) for p in self.phones)}, birthday: {self.birthday.value if self.birthday else 'N/A'}"
 
 class AddressBook(UserDict):
     def add_record(self, record):
